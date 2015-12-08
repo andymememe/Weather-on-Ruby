@@ -1,5 +1,5 @@
 # Weather-on-Ruby
-A weather app that you can enter city's name and show the city's weather and temperature in Traditional Chinese. Using [OpenWeatherMap weather API](http://openweathermap.org/api).
+A weather app that you can enter city's name and show the city's weather and temperature in Traditional Chinese. Using [OpenWeatherMap Weather API](http://openweathermap.org/api).
 
 ## Usage
 * [weathernow.rb](weathernow.rb) : Current weather and UV infomation<br>
