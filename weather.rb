@@ -1,6 +1,6 @@
 require 'net/http'
 require 'json'
-require 'api.rb'
+require './api.rb'
 
 print "輸入城市英文名字 : "
 name = gets
