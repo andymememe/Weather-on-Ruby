@@ -15,7 +15,7 @@ def uv_helper(uvv)
 		level = "極高"
 		msg = "全副武裝，使用SPF 30+的防晒油，穿著長袖襯衫，配戴太陽眼鏡及極寬簷帽；避免在正午三小時照射到陽光"
 	end
-	
+
 	result = {"level" => level,"msg" => msg}
 	return result
 end

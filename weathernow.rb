@@ -1,7 +1,7 @@
 require 'net/http'
 require 'json'
 require './api.rb'
-require './uvhelper.rb'
+# require './uvhelper.rb'
 
 # Get city's name
 print "輸入城市英文名字 : "
@@ -19,12 +19,14 @@ json = Net::HTTP.get(uri)
 weather = JSON.parse(json)
 
 if weather["cod"] == 200 then
-	# Fetch UV data
-	uri = URI('http://api.owm.io/air/1.0/uvi/current?lat=' +  weather["coord"]["lat"].to_s + '&lon=' + weather["coord"]["lon"].to_s + @api_param)
-	json = Net::HTTP.get(uri)
-	uv = JSON.parse(json)
-	uvresult = uv_helper(uv["value"])
-	
+	# # Fetch UV data
+	# uri = URI('http://api.owm.io/air/1.0/uvi/current?lat=' +  weather["coord"]["lat"].to_s + '&lon=' + weather["coord"]["lon"].to_s + @api_param)
+	# json = Net::HTTP.get(uri)
+	# uv = JSON.parse(json)
+	# if uv["value"] != nil then
+	# 	uvresult = uv_helper(uv["value"])
+	# end
+
 	# Output
 	name = weather["name"]
 	puts "本資料之時間為" + Time.at(weather["dt"]).strftime("%F %R %:z")
@@ -36,8 +38,10 @@ if weather["cod"] == 200 then
 	puts name + "的風速為" + weather["wind"]["speed"].to_s + "公尺/秒"
 	puts name + "的濕度為" + weather["main"]["humidity"].to_s + "%"
 	puts name + "的氣壓為" + weather["main"]["pressure"].to_s + "hPa"
-	puts name + "現在UV指數為" + uv["value"].to_s + "，對於一般成人的危險值為" + uvresult["level"]
-	puts "抗UV小建議 : " + uvresult["msg"]
+	# if uv["value"] != nil then
+	# 	puts name + "現在UV指數為" + uv["value"].to_s + "，對於一般成人的危險值為" + uvresult["level"]
+	# 	puts "抗UV小建議 : " + uvresult["msg"]
+	# end
 	puts ""
 	puts "資料來自於OpenWeatherMap : http://openweathermap.org/"
 	puts ""
