@@ -1,7 +1,6 @@
 require 'net/http'
 require 'json'
 require './api.rb'
-# require './uvhelper.rb'
 
 # Get city's name
 print '輸入城市英文名字 : '
