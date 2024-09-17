@@ -1,10 +1,17 @@
 require 'net/http'
 require 'json'
 require './api.rb'
+require './geocoding.rb'
 
 # Get city's name
 print '輸入城市英文名字 : '
 name = gets.chomp
+lat, lon = geocoding(name)
+
+if lat.nil?
+    puts "未知城市: #{name}"
+    exit
+end
 
 puts ''
 puts '==============================='
@@ -13,19 +20,11 @@ puts '==============================='
 puts ''
 
 # Fetch weather data
-uri = URI('http://api.openweathermap.org/data/2.5/weather?q=' + name + '&units=metric&lang=zh_tw' + @api_param)
+uri = URI("http://api.openweathermap.org/data/2.5/weather?lat=#{lat}&lon=#{lon}&units=metric&lang=zh_tw#{@api_param}")
 json = Net::HTTP.get(uri)
 weather = JSON.parse(json)
 
 if weather['cod'] == 200
-    # # Fetch UV data
-    # uri = URI('http://api.owm.io/air/1.0/uvi/current?lat=' +  weather["coord"]["lat"].to_s + '&lon=' + weather["coord"]["lon"].to_s + @api_param)
-    # json = Net::HTTP.get(uri)
-    # uv = JSON.parse(json)
-    # if uv["value"] != nil then
-    # 	uvresult = uv_helper(uv["value"])
-    # end
-
     # Output
     name = weather['name']
     puts '本資料之時間為' + Time.at(weather['dt']).strftime('%F %R %:z')
