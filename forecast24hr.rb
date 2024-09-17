@@ -1,10 +1,17 @@
 require 'net/http'
 require 'json'
 require './api.rb'
+require './geocoding.rb'
 
 # Get city's name
 print '輸入城市英文名字 : '
 name = gets.chomp
+lat, lon = geocoding(name)
+
+if lat.nil?
+    puts "未知城市: #{name}"
+    exit
+end
 
 puts ''
 puts '==============================='
@@ -13,7 +20,7 @@ puts '==============================='
 puts ''
 
 # Fetch weather data
-uri = URI('http://api.openweathermap.org/data/2.5/forecast?q=' + name + '&units=metric&lang=zh_tw&cnt=9' + @api_param)
+uri = URI("http://api.openweathermap.org/data/2.5/forecast?lat=#{lat}&lon=#{lon}&units=metric&lang=zh_tw&cnt=9#{@api_param}")
 json = Net::HTTP.get(uri)
 data = JSON.parse(json)
 i = 1
@@ -34,7 +41,7 @@ if data['cod'] == '200'
         i += 1
     end
 else
-    puts data['cod'] + ' - ' + data['message']
+    puts "#{data['cod']} - #{data['message']}"
 end
 
 puts '資料來自於OpenWeatherMap : http://openweathermap.org/'
