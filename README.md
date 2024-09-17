@@ -9,4 +9,4 @@ A weather app that you can enter city's name and show the city's weather and tem
 
 ## Important
 
-You must have  a API key and save it in format of '&APPID=YOURAPI' in the api.rb, and named it @api_param.
+You must have  a API key and save it in format of '&appid=YOURAPI' in the api.rb, and named it @api_param.
